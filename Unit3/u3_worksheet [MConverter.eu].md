@@ -67,7 +67,7 @@ mean to you? Have you ever had to triage something?
 
 Definitions/Terminology
 
-Five 9's --
+Five 9's -- 
 
 Single point of failure --
 
