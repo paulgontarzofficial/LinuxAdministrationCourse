@@ -1,6 +1,6 @@
 # 🐧 Linux Schoolwork Repository
 
-Welcome to my Linux Schoolwork repository! This is a centralized hub for all coursework, labs, notes, and project files related to my studies in Linux system administration and open-source technologies.
+Welcome to my Linux ProLUG System Administrator Course repository! This is a centralized hub for all coursework, labs, notes, and project files related to my studies in Linux system administration and open-source technologies.
 
 ---
 
@@ -13,17 +13,24 @@ This repository is organized by topic and module to maintain clarity and ease of
 
 ## 🔧 Tools and Skills Covered
 
-This repository includes content that covers (but is not limited to):
+This repository includes content that covers:
 
-- Bash scripting
-- Linux file systems and permissions
-- Systemd and service management
-- Users and group administration
-- Package management (RPM, DPKG, YUM, APT)
-- Networking fundamentals
-- Shell environment customization
-- Log analysis and troubleshooting
-- SELinux and basic security practices
+Unit 1.	Get Linux Lab Access - CLI Primer - vi/vim/nano basics
+Unit 2.	Essential Tools - Files, Redirects, and Permissions
+Unit 3.	Storage - Logical Volume Management and RAID
+Unit 4.	Operating Running Systems
+Unit 5.	Security - Manage users and groups
+Unit 6.	Security - Firewalld/UFW
+Unit 7.	Security - Patching the system/ Package Management - yum, dnf, rpm
+Unit 8.	Scripting - System checks
+Unit 9.	Docker - K3s Setup and basics
+Unit 10.	K3s advanced w/ microservices
+Unit 11.	Monitoring systems
+Unit 12.	Engineering - System baselining/benchmarking and testing
+Unit 13.	System Hardening
+Unit 14.	Ansible Automation
+Unit 15.	Engineering Troubleshooting
+Unit 16.	Incident Response - Actual incident callout and information gathering
 
 ---
 
