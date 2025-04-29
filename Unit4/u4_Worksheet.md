@@ -147,21 +147,20 @@ Mitigation: Measures that are taken to fix and prevent that incident from reoccu
 
 Reporting: Means and measures used to collect, process, store and present information within an organization. 
 
-Recovery: 
+Recovery: Involves various techniques to restore functionality after a failure or error
 
-Remediation
+Remediation: The process of fixing or addressing issues, vulnerabilities, or problems identified in a system or network. 
 
-Lessons Learned
+Lessons Learned: Taking what you have learned from an issue that may have occurred earlier and writing down what the actions taken, and your findings
 
-After action review
+After action review: Process of systematically debriefing an incident about what went well, what didn't, and how the organization can improve on their response. 
 
-Operations Bridge
+Operations Bridge: Helps manage IT infrastructure by providing a central console for monitoring events, correlating data, and automating tasks. 
 
 # Notes During Lecture/Class:
 
 Links:
 https://www.techtarget.com/searchsecurity/definition/incident-response
-
 
 Terms:
 
