@@ -67,33 +67,35 @@ mean to you? Have you ever had to triage something?
 
 Definitions/Terminology
 
-Five 9's -- 
+Five 9's -- This term refers to the amount of time a service or IT Component is online and usable. The five 9's comes from 99.999% availability annually. This means that on average, you are looking to be unavailable for no more than 5.256 Minutes/yr. 
 
-Single point of failure --
+Single point of failure -- A component that, when goes down or is inoperable, takes out the entire system without any backup solution. 
 
-Key Performance Indicators --
+Key Performance Indicators -- These are measurable values that demonstrate how effectively an organization or group is achieving their objective
 
-SLI --
+SLI -- Service Level Indicator, these are the numbers that are achieved that coincide with your Service Level Objectives.
 
-SLO --
+SLO -- Service Level Objectives, located within a Service Level Agreement, are your promises to what you are providing. 
 
-SLA --
+SLA -- Service Level Agreement, is an agreement between a provider and a client that outlines uptime and responsibility.  
 
-Active-Standby --
+Active-Standby -- Active-Standby involves one active system that is handling all the load and one system that is on standby in case something goes wrong with the primary node. 
 
-Active-Active --
+Active-Active -- Active-Active Failover utilizes systems that are running concurrently handling traffic at the same time. Both are fully operational, and if one goes down, then you have your second node to pick up the load.
 
-MTTD --
+MTTD -- Mean Time to Detect is a measure of time it takes for an organization to identify and issue or incident. 
 
-MTTR --
+MTTR -- Mean Time to Repair is a measure of time it takes to repair the system after initial incident. 
 
-MTBF --
+MTBF -- Mean Time Between Failure is a measure of time it takes for a system to fail while operating. 
 
 Notes During Lecture/Class:
 
 Links:
 
-https://www.splunk.com/en_us/blog/learn/five-nines-availability.html
+- https://www.splunk.com/en_us/blog/learn/five-nines-availability.html
+- https://www.relianoid.com/resources/knowledge-base/misc/understanding-active-active-and-active-standby-fail-over/?srsltid=AfmBOophx2R1uImfJUIaaD3uDKzTWWR0r30KJ2H3SUSLsZRCntO4cy1e
+- 
 
 Terms:
 

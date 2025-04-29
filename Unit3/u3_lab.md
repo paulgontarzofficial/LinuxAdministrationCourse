@@ -3,16 +3,17 @@
 
 **Required Materials**
 
-Rocky 9.3 – ProLUG Lab
+Rocky 9.3 – ProLUG Lab``
 
 root or sudo command access
 
 **EXERCISES (Warmup to quickly run through your system and familiarize yourself)**
 
 1.       cd ~
+	`[root@rocky9 ~]# cd ~ [root@rocky9 ~]#`
 
 2.       mkdir lvm_lab
-
+	
 3.       cd lvm_lab
 
 4.       touch somefile
@@ -28,6 +29,8 @@ Repeat 3 times
 8.       cat somefile
 
 How many lines are there?
+	- There is only one line present. 
+
 
 9.       Echo “this is a string of text” >> somefile
 
@@ -36,6 +39,8 @@ Repeat 3 times
 10.   cat somefile
 
 how many lines are there?
+	- There are now 4 lines present in the file "somefile"
+
 
 cheat with `cat somefile | wc –l`
 
@@ -46,6 +51,8 @@ repeat 3 times
 12.   cat somefile | nl
 
 how many lines are there?
+	There are now seven lines of text. 
+
 
 13.   cat somefile | nl | grep test
 
