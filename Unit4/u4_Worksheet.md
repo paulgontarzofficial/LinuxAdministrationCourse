@@ -27,9 +27,9 @@ Response
 
 Mitigation
 
-Reporting
+Reporting: Means and measures used to collect, process, store and present information within an organization. 
 
-Recovery
+Recovery: 
 
 Remediation
 
