@@ -1419,8 +1419,6 @@ more /tmp/<filename>
 
 ------------------------------------------------------------------------------------------------------------------------------
 
-*System does not have cron installed, unable to complete this lab portion*
-
 **Exploring Cron**
 
 Your system is running the cron daemon. You can check with:
