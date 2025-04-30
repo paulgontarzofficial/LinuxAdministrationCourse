@@ -16,35 +16,41 @@ Root or sudo permissions
 3.       mkdir unit4
 
 4.       mkdir unit4/test/round6   #this fails
-		- It fails due to the -p argument not being specified. in order to create parent directories, we need to pass the -p argument. 
+		- `It fails due to the -p argument not being specified. in order to create parent directories, we need to pass the -p argument.
 
 5.       mkdir -p unit4/test/round6    #this works, think about why? man (mkdir)
-		- We passed the -p argument, thus we were able to create those directories that were specified. 
+		- `We passed the -p argument, thus we were able to create those directories that were specified. 
 
 6.       cd unit4
 
 7.       ps      #read the man
 
 8.       ps –ef     #what does this show differently?
-		-e: Selects all the processes on the machine. 
-		-f: Puts the output into a full-format listing
+		`-e: Selects all the processes on the machine. 
+		`-f: Puts the output into a full-format listing
 
 9.       ps –ef | grep –i root      #what is the PID of the 4th line?
 Output: 
+```
 [root@rocky7 unit4]# ps -ef | grep -i root
 root           1       0  0 Apr24 ?        00:00:12 /sbin/init
 root           2       0  0 Apr24 ?        00:00:01 [kthreadd]
 root           3       2  0 Apr24 ?        00:00:00 [rcu_gp]
 root           4       2  0 Apr24 ?        00:00:00 [rcu_par_gp]
+```
 
 According to the output listed above, I see that on the 4th line, we have PID 4 for the process rcu_par_gp. 
 
 10.   ps –ef | grep –i root | wc –l      #what does this show you and why might it be useful?.
+```
 Output: 
 [root@rocky7 unit4]# ps -ef | grep -i root | wc -l
 95
+```
 
+```
 This shows us how many root processes are currently running. This can be useful because we can isolate the processes by the user that has them started, we can view root only privileges. 
+```
 
 11.   top            #use q to exit. Inside top, use h to find commands you can use to toggle system info
 
@@ -53,9 +59,11 @@ This shows us how many root processes are currently running. This can be useful 
 1.       Real quick check for a package that is useful.
 
 rpm –qa | grep –i iostat       #should find nothing
+```
 Output: 
 [root@rocky7 unit4]# rpm -qa | grep -i iostat
 [root@rocky7 unit4]#
+```
 
 
 2.       Let’s find what provides iostat by looking in the YUM (we’ll explore more in later lab)
@@ -64,6 +72,7 @@ dnf whatprovides iostat
 
 #should tell you that sysstat provides iostat
 Output: 
+```
 [root@rocky7 unit4]# dnf whatprovides iostat
 Last metadata expiration check: 0:30:48 ago on Tue Apr 29 14:55:50 2025.
 sysstat-12.5.4-9.el9.x86_64 : Collection of performance monitoring tools for Linux
@@ -77,15 +86,18 @@ Matched from:
 Filename    : /usr/bin/iostat
 
 [root@rocky7 unit4]#
+```
 
 
 3.       Let’s check to see if we have it
 
 rpm –qa | grep –i sysstat
 Output: 
+```
 [root@rocky7 unit4]# rpm -qa | grep -i sysstat
 sysstat-12.5.4-9.el9.x86_64
 [root@rocky7 unit4]#
+```
 
 4.       If you don’t, lets install it
 
@@ -95,7 +107,9 @@ dnf install sysstat 
 
 rpm –qa | grep –I sysstat
 
-rpm –qi sysstat<version>
+```
+rpm –qi sysstat <version>
+```
 
 iostat             #we’ll look at this more in a bit
 
@@ -115,6 +129,7 @@ If it’s not, install it so you can use vimtutor later (if you need help with v
 
 a.       cat /etc/*release
 Output: 
+```
 [root@rocky7 unit4]# cat /etc/*release
 NAME="Rocky Linux"
 VERSION="9.5 (Blue Onyx)"
@@ -139,32 +154,39 @@ Rocky Linux release 9.5 (Blue Onyx)
 Rocky Linux release 9.5 (Blue Onyx)
 Rocky Linux release 9.5 (Blue Onyx)
 [root@rocky7 unit4]#
-
+```
 
 b.       uname: Print system information
 Output: 
+```
 [root@rocky7 unit4]# uname
 Linux
-[root@rocky7 unit4]# 
+[root@rocky7 unit4]# `
+```
 
 c.       uname -a: Print all information, in the following order
 Output: 
+```
 [root@rocky7 unit4]# uname -a
 Linux rocky7 5.14.0-427.42.1.el9_4.x86_64 #1 SMP PREEMPT_DYNAMIC Thu Oct 31 14:01:51 UTC 2024 x86_64 x86_64 x86_64 GNU/Linux
 [root@rocky7 unit4]#
+```
 
 
 d.       uname –r: Print the kernel release 
 Output: 
+```
 [root@rocky7 unit4]# uname -r
 5.14.0-427.42.1.el9_4.x86_64
 [root@rocky7 unit4]#
+```
 
 
 man uname to see what those options mean if you don’t recognize the values
 
 e.       rpm -qa | grep -i kernel     #what is your kernel number? Highlight it (copy in putty)
 Output: 
+```
 [root@rocky7 unit4]# rpm -qa | grep -i kernel
 kernel-modules-core-5.14.0-427.18.1.el9_4.x86_64
 kernel-core-5.14.0-427.18.1.el9_4.x86_64
@@ -175,9 +197,11 @@ kernel-modules-5.14.0-427.42.1.el9_4.x86_64
 kernel-core-5.14.0-503.23.1.el9_5.x86_64
 kernel-modules-core-5.14.0-503.23.1.el9_5.x86_64
 kernel-modules-5.14.0-503.23.1.el9_5.x86_64
+```
 
-f.        rpm –qi <kernel from earlier>       #what does this tell you about your kernel? When was the kernel last updated? What license is your kernel released under?
+f.        `rpm –qi <kernel from earlier>`       #what does this tell you about your kernel? When was the kernel last updated? What license is your kernel released under?
 Output: 
+```
 [root@rocky7 unit4]# rpm -qi kernel-core-5.14.0-503.23.1.el9_5.x86_64
 Name        : kernel-core
 Version     : 5.14.0
@@ -201,12 +225,14 @@ Linux operating system.  The kernel handles the basic functions
 of the operating system: memory allocation, process allocation, device
 input and output, etc.
 [root@rocky7 unit4]#
+```
 
 
 2.       Check the number of disks
 
 a.       fdisk -l
 Output: 
+```
 [root@rocky7 unit4]# fdisk -l
 Disk /dev/xvde: 3 GiB, 3221225472 bytes, 6291456 sectors
 Units: sectors of 1 * 512 = 512 bytes
@@ -231,10 +257,12 @@ Units: sectors of 1 * 512 = 512 bytes
 Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 512 bytes / 512 bytes
 [root@rocky7 unit4]#
+```
 
 
 b.       ls /dev/sd*
 
+```
 When might this command be useful? 
 	- This can be useful to view the available disks and also your partition tables. 
 What are we assuming about the disks for this to work? 
@@ -246,9 +274,11 @@ How do you know if it’s a partition or a disk?
 		- ex. /dev/sda
 	- Partitions will have the physical device name plus a number at the end that represents the partition. 
 		- ex. /dev/sda1
+```
 
 c.       pvs 
 
+```
 what system are we running if we have physical volumes? 
 	- If we have physical volumes then we would be using LVM (Logical Volume Manager)
 
@@ -259,11 +289,13 @@ What other things can we tell with vgs and lvs?
 d.       Use pvdisply, vgdisplay, and lvdisplay to look at your carved up volumes. Thinking back to last week’s lab, what might be interesting from each of those?
 
 e.       Try a command like lvdisplay | egrep "Path|Size"   and see what it shows. Does that output look useful? Try to egrep on some other values “separate with | between search items.
+```
 
 Check some quick disk statistics
 
 f.        iostat –d
 Output: 
+```
 [root@rocky7 unit4]# iostat -d
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky7)     04/29/25        _x86_64_        (2 CPU)
 
@@ -275,10 +307,12 @@ xvde              0.00         0.01         0.00         0.00       5044        
 
 
 [root@rocky7 unit4]#
+```
 
 
 g.       iostat –d 2     #Wait for a while, then use crtl + c to break. What did this do? Try changing this to a different number.
 Output: 
+```
 [root@rocky7 unit4]# iostat -d 2
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky7)     04/29/25        _x86_64_        (2 CPU)
 
@@ -311,10 +345,12 @@ xvde              0.00         0.00         0.00         0.00          0        
 
 ^C
 [root@rocky7 unit4]#
+```
 
 
 h.       iostat –d 2 5    
 Output: 
+```
 [root@rocky7 unit4]# iostat -d 2 5
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky7)     04/29/25        _x86_64_        (2 CPU)
 
@@ -354,18 +390,22 @@ xvde              0.00         0.00         0.00         0.00          0        
 
 
 [root@rocky7 unit4]#
+```
 
 Don’t break this, just wait. 
+```
 What did this do differently? 
 	- This displays 5 reports at a two second interval for all devices. 
 Why might this be useful?
 	- This allows us to monitor devices for disk utilization within a given time frame while automatically halting the process if we decide to specify how many reports are given. 
-	- 
+```
+
 
 3.       Check the amount of RAM
 
 a.       cat /proc/meminfo
 Output: 
+```
 [root@rocky7 unit4]# cat /proc/meminfo
 MemTotal:        3985404 kB
 MemFree:         1440512 kB
@@ -425,38 +465,45 @@ DirectMap4k:      118784 kB
 DirectMap2M:     3018752 kB
 DirectMap1G:     1048576 kB
 [root@rocky7 unit4]#
+```
 
 
 b.       free
 Output: 
+```
 [root@rocky7 unit4]# free
                total        used        free      shared  buff/cache   available
 Mem:         3985404     2602920     1441876     2090712     2205848     1382484
 Swap:              0           0           0
 [root@rocky7 unit4]#
+```
 
 
 c.       free –m
 Output: 
+```
 [root@rocky7 unit4]# free -m
                total        used        free      shared  buff/cache   available
 Mem:            3891        2541        1408        2041        2154        1350
 Swap:              0           0           0
 [root@rocky7 unit4]#
-
+```
 
 What do each of these commands show you? How are they useful?
 
+```
 cat /proc/meminfo: Kernel file that provides usage report about memory on the system. It can show you important information that could assist in troubleshooting Linux systems. 
 
 free: Displays the amount of free and used memory in the system. 
 
 free -m: Displays the amount of free and used memory, however the -m argument shows data in Megabytes vice Bytes. 
+```
 
 4.       Check the number of processors and processor info
 
 a.       cat /proc/cpuinfo
 Output: 
+```
 [root@rocky19 ~]# cat /proc/cpuinfo
 processor       : 0
 vendor_id       : GenuineIntel
@@ -513,6 +560,7 @@ address sizes   : 46 bits physical, 48 bits virtual
 power management:
 
 [root@rocky19 ~]#
+```
 
 
 What type of processors do you have? 
@@ -525,9 +573,11 @@ Look at the flags. Sometimes when compiling these are important to know. This is
 
 b.       cat /proc/cpuinfo | grep proc | wc –l
 Output: 
+```
 [root@rocky19 ~]# cat /proc/cpuinfo | grep proc | wc -l
 2
 [root@rocky19 ~]#
+```
 
 Does this command accurately count the processors?
 	- Yes, the command correctly identifies that there are two processors for that system. 
@@ -536,6 +586,7 @@ Check some quick processor statistics
 
 c.       iostat –c
 Output: 
+```
 [root@rocky19 ~]# iostat -c
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -545,10 +596,12 @@ avg-cpu:  %user   %nice %system %iowait  %steal   %idle
 
 
 [root@rocky19 ~]#
+```
 
 
 d.       iostat –c 2     
 Output: 
+```
 [root@rocky19 ~]# iostat -c 2
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -563,7 +616,7 @@ avg-cpu:  %user   %nice %system %iowait  %steal   %idle
 
 ^C
 [root@rocky19 ~]#
-
+```
 What did this do? 
 	- This is acting the same as before when we were checking disk utilization. We set a timer for iostat to display information every two seconds. 
 
@@ -571,6 +624,7 @@ Try changing this to a different number.
 
 e.       iostat –c 2 5    
 Output: 
+```
 [root@rocky19 ~]# iostat -c 2 5
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -600,6 +654,7 @@ avg-cpu:  %user   %nice %system %iowait  %steal   %idle
 
 
 [root@rocky19 ~]#
+```
 
 What did this do differently? 
 	- iostat was instructed to give us a report in a two second interval, for a total of five reports. 
@@ -614,10 +669,11 @@ Does this look familiar? To what we did earlier with iostat?
 
 a.       uptime
 Output: 
+```
 [root@rocky19 ~]# uptime
  16:58:16 up 2 days,  8:18,  1 user,  load average: 0.00, 0.00, 0.00
 [root@rocky19 ~]#
-
+```
 b.       man uptime
 
 Read the man for uptime and figure out what those 3 numbers represent. 
@@ -630,6 +686,7 @@ Referencing this server, do you think it is under high load? Why or why not?
 
 a.       last
 Output: 
+```
 [root@rocky19 ~]# last
 root     pts/0        192.168.11.245   Tue Apr 29 16:41   still logged in
 root     pts/0        192.168.200.25   Mon Apr 28 23:55 - 23:55  (00:00)
@@ -643,11 +700,12 @@ reboot   system boot  5.14.0-427.42.1. Sun Apr 27 08:41   still running
 
 wtmp begins Sun Apr 27 08:41:17 2025
 [root@rocky19 ~]#
-
+```
 Last is a command that outputs backwards. (Top is most recent). So it is less than useful without using the more command.
 
 b.       last | more
 Output: 
+```
 [root@rocky19 ~]# last | more
 root     pts/0        192.168.11.245   Tue Apr 29 16:41   still logged in
 root     pts/0        192.168.200.25   Mon Apr 28 23:55 - 23:55  (00:00)
@@ -661,30 +719,35 @@ reboot   system boot  5.14.0-427.42.1. Sun Apr 27 08:41   still running
 
 wtmp begins Sun Apr 27 08:41:17 2025
 [root@rocky19 ~]#
-
+```
 Were you the last person to log in? Who else has logged in today?
 	- As of right now, I was the only person to have logged in to this server today, however there were multiple logins from yesterday, 28APR25. 
 
 c.       w
 Output: 
+```
 [root@rocky19 ~]# w
  17:03:00 up 2 days,  8:23,  1 user,  load average: 0.00, 0.00, 0.00
 USER     TTY        LOGIN@   IDLE   JCPU   PCPU WHAT
 root     pts/0     16:41    0.00s  0.08s  0.01s w
 [root@rocky19 ~]#
+```
 
 d.       who
 Output: 
+```
 [root@rocky19 ~]# who
 root     pts/0        2025-04-29 16:41 (192.168.11.245)
 [root@rocky19 ~]#
+```
 
 e.       whoami
 Output: 
+```
 [root@rocky19 ~]# whoami
 root
 [root@rocky19 ~]#
-
+```
 how many other users are on this system? What does the pts/0 mean on google?
 	- There are currently no other users logged in at this time. 
 	- pts/0 is the current "psuedo terminal" the user is logged in on. 
@@ -693,6 +756,7 @@ how many other users are on this system? What does the pts/0 mean on google?
 
 a.       ps –aux | more
 Output: 
+```
 [root@rocky19 ~]# ps -aux | more
 USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
 root           1  0.0  0.4 107840 16192 ?        Ss   Apr27   0:06 /sbin/init
@@ -794,7 +858,8 @@ root        8119  0.0  0.0      0     0 ?        I    17:04   0:00 [kworker/1:1-
 root        8127  0.0  0.0      0     0 ?        I    17:10   0:00 [kworker/1:2-ata_sff]
 root        8135  0.0  0.1  16776  6272 pts/0    R+   17:13   0:00 ps -aux
 root        8136  0.0  0.0   3240  2176 pts/0    R+   17:13   0:00 more
-[root@rocky19 ~]# <C
+
+[root@rocky19 ~]# 
 
 b.       ps –ef | more
 Output: 
@@ -900,15 +965,18 @@ root        8127       2  0 17:10 ?        00:00:00 [kworker/1:2-ata_sff]
 root        8138    7993  0 17:14 pts/0    00:00:00 ps -ef
 root        8139    7993  0 17:14 pts/0    00:00:00 more
 [root@rocky19 ~]#
+```
 
 c.       ps –ef | wc –l
 Output: 
+```
 [root@rocky19 ~]# ps -ef | wc -l
 99
 [root@rocky19 ~]#
-
+```
 d.       Try to use what you’ve learned to see all the processes owned by your user
 Output: 
+```
 [root@rocky19 ~]# ps -ef | grep root
 root           1       0  0 Apr27 ?        00:00:06 /sbin/init
 root           2       0  0 Apr27 ?        00:00:00 [kthreadd]
@@ -1005,19 +1073,22 @@ root        8127       2  0 17:10 ?        00:00:00 [kworker/1:2-ata_sff]
 root        8143    7993  0 17:15 pts/0    00:00:00 ps -ef
 root        8144    7993  0 17:15 pts/0    00:00:00 grep --color=auto root
 [root@rocky19 ~]#
+```
 
 e.       Try to use what you’ve learned to count up all of those processes owned by your user
 Output: 
+```
 [root@rocky19 ~]# ps -ef | grep root | wc -l
 95
 [root@rocky19 ~]#
-
+```
 8.       Looking at system usage (historical)
 
 a.       Check processing for last day
 
 sar | more
 Output: 
+```
 [root@rocky19 ~]# sar | more
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1127,12 +1198,13 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 17:10:04        all      0.04      0.00      0.38      0.08      0.18     99.32
 Average:        all      0.04      0.02      0.38      0.07      0.18     99.31
 [root@rocky19 ~]#
-
+```
 
 b.       Check memory for the last day
 
 sar –r | more
 Output: 
+```
 [root@rocky19 ~]# sar -r | more
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1242,12 +1314,13 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 17:10:04      1477120   1417208    192064      4.82        16   2140544   2616764     65.66   2240108        64         0
 Average:      1470196   1410194    200310      5.03        16   2140379   2586384     64.90   2232169        64         0
 [root@rocky19 ~]#
-
+```
 
 Sar is a tool that shows the 10 minute weighted average of the system for the last day. Sar is tremendously useful for showing long periods of activity and system load. It is exactly the opposite in it’s usefulness of spikes or high traffic loads. In a 20 minute period of 100% usage a system may just show to averages times of 50% and 50%, never actually giving accurate info. Problems typically need to be proactively tracked by other means, or with scripts, as we will see below.
 
 Sar can also be run interactively. Run the command `yum whatprovides sar` and you will see that it is sysstat. You may have guessed that sar runs almost exactly like iostat.
 
+```
 [root@rocky19 ~]# yum whatprovides sar
 Last metadata expiration check: 2:48:20 ago on Tue Apr 29 14:29:59 2025.
 sysstat-12.5.4-9.el9.x86_64 : Collection of performance monitoring tools for Linux
@@ -1261,12 +1334,13 @@ Matched from:
 Filename    : /usr/bin/sar
 
 [root@rocky19 ~]#
-
+```
 
 Try the same commands from earlier, but with their interactive information
 
 sar 2       #crtl + c to break
 Output: 
+```
 [root@rocky19 ~]# sar 2
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1279,9 +1353,10 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 ^C
 Average:        all      0.00      0.00      0.45      0.05      0.20     99.30
 [root@rocky19 ~]#
-
+```
 sar 2 5
 Output: 
+```
 [root@rocky19 ~]# sar 2 5
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1293,11 +1368,12 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 17:19:28        all      0.00      0.00      0.50      0.25      0.00     99.25
 Average:        all      0.00      0.00      0.35      0.10      0.20     99.35
 [root@rocky19 ~]#
-
+```
 or
 
 sar –r 2
 Output: 
+```
 [root@rocky19 ~]# sar -r 2
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1310,10 +1386,11 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 ^C
 Average:      1475604   1415736    193448      4.85        16   2140548   2617184     65.67   2240370        64         0
 [root@rocky19 ~]#
-
+```
 
 sar –r 2 5
 Output: 
+```
 [root@rocky19 ~]# sar -r 2 5
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        (2 CPU)
 
@@ -1325,22 +1402,25 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/29/25        _x86_64_        
 17:20:22      1475604   1415740    193436      4.85        16   2140556   2617192     65.67   2240420        64         0
 Average:      1475604   1415740    193436      4.85        16   2140556   2617192     65.67   2240398        64         0
 [root@rocky19 ~]#
+```
 
 c.       Check sar logs for previous daily usage
 
 cd /var/log/sa/
 
-# ls
+ls
 Output: 
+```
 [root@rocky19 ~]# cd /var/log/sa/
 [root@rocky19 sa]# ls
 sa27  sa28  sa29  sar27  sar28
 [root@rocky19 sa]#
 
 sa01  sa02  sa03  sa04  sa05  sar01  sar02  sar03  sar04
-
+```
 sar –f sa03 | head
 Output: 
+```
 [root@rocky19 sa]# sar -f sa28 | head
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/28/25        _x86_64_        (2 CPU)
 
@@ -1353,10 +1433,12 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/28/25        _x86_64_        
 01:00:04        all      0.04      0.00      0.37      0.08      0.18     99.34
 01:10:04        all      0.04      0.00      0.37      0.08      0.18     99.33
 [root@rocky19 sa]#
+```
 
 
 sar –r –f sa03 | head
 Output: 
+```
 [root@rocky19 sa]# sar -r -f sa28 | head
 Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/28/25        _x86_64_        (2 CPU)
 
@@ -1369,7 +1451,7 @@ Linux 5.14.0-427.42.1.el9_4.x86_64 (rocky19)    04/28/25        _x86_64_        
 01:00:04      1463160   1403096    210116      5.27        16   2139316   2584268     64.84   2230772        64         0
 01:10:04      1462544   1402480    210732      5.29        16   2139316   2584268     64.84   2230772        64         0
 [root@rocky19 sa]#
-
+```
 
 #should output just the beginning of 3 July (whatever month you’re in). Most Sar data is kept for just one month but is very configurable. Read man sar for more info.
 
@@ -1383,11 +1465,13 @@ pwd
 
 ls
 Output: 
+```
 [root@rocky19 sa]# pwd
 /var/log/sa
 [root@rocky19 sa]# ls
 sa27  sa28  sa29  sar27  sar28
 [root@rocky19 sa]#
+```
 
 
 We know the files we want are in this directory and all look like this sa*
