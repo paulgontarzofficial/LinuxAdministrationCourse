@@ -1,3 +1,6 @@
+[root@rocky18 ~]# ll
+-bash: ll: command not found
+[root@rocky18 ~]#
 
 **ProLUG 101**
 
