@@ -14,6 +14,7 @@ Unit 5 Discussion Post 1**: Review the page: [https://attack.mitre.org/](https:/
 2. Why, as a system administrator and not directly in security, do you think it’s so important to understand how your systems can be attacked? Isn’t it someone else’s problem to think about that?
 		```- On the Job Role, yes, technically it is someone else's job, if a security engineer is also working on the system. I have always heard that "security is everyone's responsibility." If security is everyone's responsibility, then you are inherently goin to be more protected the more eyes you put on a system. This allows for tighter security postures and overall knowledge for the team.  ```
 3. What impact to the organization is data exfiltration? Even if you’re not a data owner or data custodian, why is it so important to understand the data on your systems?
+		```The impact data exfiltration can be detrimental to the success of the company you work for. You are a member of a team that is responsible for the upkeep of servers, and regardless of whether you are in charge of the data on those systems or not, it is still going to impact you as an employee of that company.```
 
 **Unit 5 Discussion Post 2:** Find a blog or article on the web that discusses the user environment in Linux. You may want to search for .bashrc or (dot) environment files in Linux.
 
