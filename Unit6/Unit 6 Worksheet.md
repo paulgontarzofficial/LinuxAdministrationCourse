@@ -88,23 +88,23 @@ The discussion posts are done in Discord threads. Click the 'Threads' icon on th
 
 ---
 
-Firewall:
+Firewall: Firewalls, on a basic level, are in charge of the monitoring, denial, and acceptance of packets that are sent across a network either from outside a local network or internally. 
 
-Zone:
+Zone: Logical groupings of network interfaces or devices within a network that are subject to the same firewall policies. 
 
-Service:
+Service: These are the processes that run in the background of the computer that run specific tasks without user interaction. In relation to firewalls, we can block certain services from accessing the network. 
 
-DMZ:
+DMZ: Demilitarized Zone, is a physical or logical subnet that separates a LAN from other untrusted networks -- usually, the public internet. 
 
-Proxy:
+Proxy: Is a server that acts as an intermediary between a client and a server and can handle requests and responses. It can be used for various purposes like security, privacy, and accessing geographical restricted content. 
 
-Stateful packet filtering:
+Stateful packet filtering: Security mechanism where a firewall keeps track of the state of network connections to make more informed decisions about packet to block or allow. 
 
-Stateless packet filtering:
+Stateless packet filtering: Security mechanism that does not include packet inspection however utilizes fixed rules that can allow or deny packets. 
 
-WAF:
+WAF: Web Application Firewalls protect APIs and web applications by filtering and monitoring HTTP Traffic. 
 
-NGFW:
+NGFW: Next Generation Firewalls, expands on the standard firewall capabilities by utilizing application control, intrusion prevention, and threat intelligence. 
 
 ## Digging Deeper
 

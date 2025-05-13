@@ -118,6 +118,13 @@ A very important thing to note before starting this lab. You’re connected into
 systemctl start firewalld
 ```
 
+Output: 
+
+```shell
+[root@rocky15 ~]# systemctl start firewalld
+[root@rocky15 ~]#
+
+```
 #### Set the firewalld daemon to be persistent through reboots:
 
 [](https://github.com/ProfessionalLinuxUsersGroup/lac/blob/main/src/u6lab.md#set-the-firewalld-daemon-to-be-persistent-through-reboots)
@@ -126,6 +133,13 @@ systemctl start firewalld
 systemctl enable firewalld
 ```
 
+Output: 
+
+```shell
+[root@rocky15 ~]# systemctl enable firewalld
+[root@rocky15 ~]#
+
+```
 Verify with systemctl status firewalld again from **step 1**
 
 #### Check which zones exist:
@@ -136,12 +150,45 @@ Verify with systemctl status firewalld again from **step 1**
 firewall-cmd --get-zones
 ```
 
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --get-zones
+block dmz drop external home internal nm-shared public trusted work
+[root@rocky15 ~]#
+
+```
 #### Checking the values within each zone:
 
 [](https://github.com/ProfessionalLinuxUsersGroup/lac/blob/main/src/u6lab.md#checking-the-values-within-each-zone)
 
 ```shell
 firewall-cmd --list-all --zone=public
+```
+
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --list-all --zone=public
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: eth0
+  sources:
+  services: cockpit dhcpv6-client ssh
+  ports: 9100/tcp
+  protocols:
+  forward: yes
+  masquerade: no
+  forward-ports:
+  source-ports:
+  icmp-blocks:
+  rich rules:
+[root@rocky15 ~]#
+
+
 ```
 
 **General Output**
@@ -166,6 +213,15 @@ rich rules:
 firewall-cmd --get-default
 ```
 
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --get-default
+public
+[root@rocky15 ~]#
+
+```
 Example Output:
 
 ```shell
@@ -176,6 +232,17 @@ Next Command
 
 ```shell
 firewall-cmd --get-active
+```
+
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --get-active-zones
+public
+  interfaces: eth0
+[root@rocky15 ~]#
+
 ```
 
 Example Output:
@@ -201,6 +268,17 @@ We know the zones from above, set your firewall to the different active or defau
 ifconfig -a | grep -i flags
 ```
 
+
+Output: 
+
+```shell
+[root@rocky15 ~]# ifconfig -a | grep -i flags
+eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+[root@rocky15 ~]#
+
+```
+
 Example Output:
 
 ```shell
@@ -216,6 +294,16 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
 firewall-cmd --set-default-zone=work
 ```
 
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --set-default-zone=work
+success
+[root@rocky15 ~]#
+
+```
+
 Example Output:
 
 ```shell
@@ -228,6 +316,17 @@ Next Command:
 firewall-cmd --get-active-zones
 ```
 
+
+Output: 
+
+```shell
+
+[root@rocky15 ~]# firewall-cmd --get-active-zones
+work
+  interfaces: eth0
+[root@rocky15 ~]#
+
+```
 Example Output:
 
 ```shell
@@ -237,10 +336,32 @@ work
 
 Attempt to set it back to the original public zone and verify. Set it to one other zone, verify, then set it back to public.
 
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --set-default-zone=public
+success
+[root@rocky15 ~]#
+[root@rocky15 ~]# firewall-cmd --get-active-zones
+public
+  interfaces: eth0
+[root@rocky15 ~]#
+
+```
+
 Changing interfaces and assigning different zones (use another interface from your earlier `ifconfig -a`
 
 ```shell
 firewall-cmd --change-interface=virbr0 --zone dmz
+```
+
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --change-interface=virbr0 --zone dmz
+success
+[root@rocky15 ~]#
 ```
 
 Example Output:
@@ -255,6 +376,16 @@ Next Command:
 firewall-cmd --add-source 192.168.11.0/24 --zone=public
 ```
 
+
+Output: 
+
+```shell
+[root@rocky15 ~]# firewall-cmd --add-source 192.168.11.0/24 --zone=public
+success
+[root@rocky15 ~]#
+
+```
+
 Example Output:
 
 ```shell
@@ -265,6 +396,19 @@ Next Command:
 
 ```shell
 firewall-cmd --get-active-zones
+```
+
+
+Output:
+```shell
+[root@rocky15 ~]# firewall-cmd --get-active-zones
+dmz
+  interfaces: virbr0
+public
+  interfaces: eth0
+  sources: 192.168.11.0/24
+[root@rocky15 ~]#
+
 ```
 
 Example Output:
